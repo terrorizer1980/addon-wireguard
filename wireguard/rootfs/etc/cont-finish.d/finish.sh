@@ -12,8 +12,8 @@ if bashio::config.has_value "server.interface"; then
 fi
 
 if ! ip link | grep "${interface}" > /dev/null; then
-   bashio::log.info "Interface is already up shutting it down!"
-   exec wg-quick down "${interface}"
+    bashio::log.info "Interface was not up no need to clean up!"
 else
-   bashio::log.info "Interface was not up no need to clean up!"
+    bashio::log.info "Interface is already up shutting it down!"
+    exec wg-quick down "${interface}"
 fi
